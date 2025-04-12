@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@account-abstraction/contracts@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@account-abstraction/contracts/-/contracts-0.8.0.tgz#7633687d95a331fa6ba0aa788e9384308b00539c"
+  dependencies:
+    "@openzeppelin/contracts" "^5.1.0"
+    "@uniswap/v3-periphery" "^1.4.3"
+
 "@adraffy/ens-normalize@1.10.1":
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.10.1.tgz#63430d04bd8c5e74f8d7d049338f1cd9d4f02069"
@@ -586,6 +593,14 @@
     "@nomicfoundation/solidity-analyzer-linux-x64-musl" "0.1.2"
     "@nomicfoundation/solidity-analyzer-win32-x64-msvc" "0.1.2"
 
+"@openzeppelin/contracts@3.4.2-solc-0.7":
+  version "3.4.2-solc-0.7"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.4.2-solc-0.7.tgz#38f4dbab672631034076ccdf2f3201fab1726635"
+
+"@openzeppelin/contracts@^5.1.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-5.3.0.tgz#0a90ce16f5c855e3c8239691f1722cd4999ae741"
+
 "@scure/base@~1.1.0", "@scure/base@~1.1.6":
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.9.tgz#e5e142fbbfe251091f9c5f1dd4c834ac04c3dbd1"
@@ -821,6 +836,28 @@
   dependencies:
     "@types/node" "*"
 
+"@uniswap/lib@^4.0.1-alpha":
+  version "4.0.1-alpha"
+  resolved "https://registry.yarnpkg.com/@uniswap/lib/-/lib-4.0.1-alpha.tgz#2881008e55f075344675b3bca93f020b028fbd02"
+
+"@uniswap/v2-core@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@uniswap/v2-core/-/v2-core-1.0.1.tgz#af8f508bf183204779938969e2e54043e147d425"
+
+"@uniswap/v3-core@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@uniswap/v3-core/-/v3-core-1.0.1.tgz#b6d2bdc6ba3c3fbd610bdc502395d86cd35264a0"
+
+"@uniswap/v3-periphery@^1.4.3":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@uniswap/v3-periphery/-/v3-periphery-1.4.4.tgz#d2756c23b69718173c5874f37fd4ad57d2f021b7"
+  dependencies:
+    "@openzeppelin/contracts" "3.4.2-solc-0.7"
+    "@uniswap/lib" "^4.0.1-alpha"
+    "@uniswap/v2-core" "^1.0.1"
+    "@uniswap/v3-core" "^1.0.0"
+    base64-sol "1.0.1"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -995,6 +1032,10 @@ base-x@^3.0.2:
   resolved "https://registry.yarnpkg.com/base-x/-/base-x-3.0.11.tgz#40d80e2a1aeacba29792ccc6c5354806421287ff"
   dependencies:
     safe-buffer "^5.0.1"
+
+base64-sol@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/base64-sol/-/base64-sol-1.0.1.tgz#91317aa341f0bc763811783c5729f1c2574600f6"
 
 bech32@1.1.4:
   version "1.1.4"
