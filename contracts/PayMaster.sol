@@ -36,19 +36,27 @@ contract Paymaster is IPaymaster, Ownable {
      * @notice Validates whether this paymaster will sponsor the given UserOperation.
      * @dev This version simply checks if gas required is within allowed limits.
      */
+
     function validatePaymasterUserOp(
-        PackedUserOperation calldata /*userOp*/,
-        bytes32, // userOpHash (can be used in future enhancements)
+        PackedUserOperation calldata userOp,
+        bytes32, // userOpHash
         uint256 requiredPreFund
     ) external view override returns (bytes memory context, uint256 validationData) {
         require(msg.sender == address(entryPoint), "Unauthorized caller");
-
-        if (requiredPreFund > gasLimit) {
-            return ("", 1); // 1 signals failure (non-zero validationData)
+    
+        // Only sponsor if this is a wallet creation (initCode is non-empty)
+        if (userOp.initCode.length == 0) {
+            return ("", 1); // don't sponsor, return non-zero validationData
         }
-
-        return ("", 0); // context is unused here, and 0 means valid
+    
+        // Optional: check that requiredPreFund isn't crazy high
+        if (requiredPreFund > gasLimit) {
+            return ("", 1);
+        }
+    
+        return ("", 0); // Sponsor this operation
     }
+    
 
     /**
      * @notice Pays the gas fee after the operation completes.
@@ -63,7 +71,9 @@ contract Paymaster is IPaymaster, Ownable {
         require(msg.sender == address(entryPoint), "Only EntryPoint can call postOp");
 
         if (mode == PostOpMode.opSucceeded || mode == PostOpMode.opReverted) {
-            require(token.transfer(msg.sender, actualGasCost), "Token transfer failed");
+            (bool success, ) = payable(msg.sender).call{value: actualGasCost}("");
+            require(success, "Native token transfer failed");
+
         }
 
         emit GasPayment(msg.sender, actualGasCost);
