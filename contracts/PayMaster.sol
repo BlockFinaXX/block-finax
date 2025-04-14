@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@account-abstraction/contracts/interfaces/IPaymaster.sol";
 import "@account-abstraction/contracts/interfaces/IEntryPoint.sol";
 import "@account-abstraction/contracts/core/UserOperationLib.sol";
@@ -16,20 +15,17 @@ import "@account-abstraction/contracts/core/UserOperationLib.sol";
  */
 contract Paymaster is IPaymaster, Ownable {
     IEntryPoint public immutable entryPoint;
-    IERC20 public immutable token;
     uint256 public gasLimit;
 
     event PaymasterSetup(address indexed entryPoint, address indexed token, uint256 gasLimit);
     event GasPayment(address indexed user, uint256 amount);
 
-    constructor(address _entryPoint, address _token, uint256 _gasLimit,  address initialOwner) Ownable(initialOwner)  {
+    constructor(address _entryPoint, uint256 _gasLimit,  address initialOwner) Ownable(initialOwner)  {
         
         require(_entryPoint != address(0), "Invalid EntryPoint");
-        require(_token != address(0), "Invalid token");
         entryPoint = IEntryPoint(_entryPoint);
-        token = IERC20(_token);
         gasLimit = _gasLimit;
-        emit PaymasterSetup(_entryPoint, _token, _gasLimit);
+        emit PaymasterSetup(_entryPoint, address(0), _gasLimit);
     }
 
     /**
@@ -84,20 +80,6 @@ contract Paymaster is IPaymaster, Ownable {
      */
     function setGasLimit(uint256 newGasLimit) external onlyOwner {
         gasLimit = newGasLimit;
-    }
-
-    /**
-     * @notice Allows the owner to withdraw tokens from the Paymaster.
-     */
-    function withdrawTokens(uint256 amount) external onlyOwner {
-        require(token.transfer(owner(), amount), "Token withdrawal failed");
-    }
-
-    /**
-     * @notice Get balance of tokens held by this Paymaster.
-     */
-    function getTokenBalance() external view returns (uint256) {
-        return token.balanceOf(address(this));
     }
 
     receive() external payable {}
