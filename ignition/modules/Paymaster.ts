@@ -1,22 +1,28 @@
-// scripts/deployPaymaster.ts
-async function main() {
-  const [deployer] = await ethers.getSigners();
-  const Paymaster = await ethers.getContractFactory("Paymaster");
+import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
-  const entryPoint = "0x..."; // Your deployed EntryPoint address
-  const token = "0x..."; // Your ERC20 token address
-  const gasLimit = 1_000_000;
-  const initialOwner = deployer.address;
+const DEFAULT_GAS_LIMIT = 5_000_000;
 
-  const paymaster = await Paymaster.deploy(
-    entryPoint,
-    token,
-    gasLimit,
-    initialOwner
+const PaymasterModule = buildModule("PaymasterModule", (m) => {
+  const entryPoint = m.getParameter(
+    "entryPoint",
+    "0x8fF54D864E85Ac1Ef4e077F71D4A19aaE8Fb3Bf4"
   );
 
-  await paymaster.deployed();
-  console.log("Paymaster deployed to:", paymaster.address);
-}
+  const gasLimit = m.getParameter("gasLimit", DEFAULT_GAS_LIMIT);
 
-main().catch(console.error);
+  // 👇 Pass deployer address via deployment params
+  const initialOwner = m.getParameter(
+    "initialOwner",
+    "0x1D434f1b7a3F009366621330c9ba61118598b40b"
+  );
+
+  const paymaster = m.contract("Paymaster", [
+    entryPoint,
+    gasLimit,
+    initialOwner,
+  ]);
+
+  return { paymaster };
+});
+
+export default PaymasterModule;
