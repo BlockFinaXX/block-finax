@@ -5,7 +5,13 @@ import "./SmartAccount.sol";
 import "@account-abstraction/contracts/interfaces/IEntryPoint.sol";
 
 contract SmartAccountFactory {
-    IEntryPoint public immutable entryPoint;
+    // IEntryPoint public immutable entryPoint;
+    IEntryPoint private immutable _entryPoint;
+
+    function entryPoint() public view override returns (IEntryPoint) {
+        return _entryPoint;
+    }
+    
     address public immutable walletImplementation;
 
     event WalletDeployed(address wallet, address owner);
@@ -13,7 +19,6 @@ contract SmartAccountFactory {
     constructor(IEntryPoint _entryPoint) {
         entryPoint = _entryPoint;
 
-        // Deploy a base wallet to clone later
         SmartAccount wallet = new SmartAccount(_entryPoint, address(this));
         walletImplementation = address(wallet);
     }
