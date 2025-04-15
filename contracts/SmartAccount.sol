@@ -15,12 +15,12 @@ contract SmartAccount is BaseAccount {
 
     address public owner;
 
-    constructor(IEntryPoint _entryPoint, address _owner) {
-        entryPoint = _entryPoint;
+    constructor(IEntryPoint entryPoint_, address _owner) {
+        _entryPoint = entryPoint_;
         owner = _owner;
     }
 
-     function entryPoint() public view override returns (IEntryPoint) {
+    function entryPoint() public view override returns (IEntryPoint) {
         return _entryPoint;
     }
 
@@ -37,7 +37,7 @@ contract SmartAccount is BaseAccount {
 
     function _validateAndUpdateNonce(
         PackedUserOperation calldata userOp
-    ) internal override {
+    ) internal {
         require(nonce == userOp.nonce, "Invalid nonce");
         nonce++;
     }
@@ -48,13 +48,8 @@ contract SmartAccount is BaseAccount {
         address dest,
         uint256 value,
         bytes calldata func
-    ) external {
+    ) external override {
         require(msg.sender == owner, "Only owner");
-        (bool success, ) = dest.call{value: value}(func);
-        require(success, "Execution failed");
-    }
-
-      function execute(address dest, uint256 value, bytes calldata func) external override {
         (bool success, ) = dest.call{value: value}(func);
         require(success, "Execution failed");
     }

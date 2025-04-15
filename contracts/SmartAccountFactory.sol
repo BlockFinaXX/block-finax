@@ -5,35 +5,49 @@ import "./SmartAccount.sol";
 import "@account-abstraction/contracts/interfaces/IEntryPoint.sol";
 
 contract SmartAccountFactory {
-    // IEntryPoint public immutable entryPoint;
     IEntryPoint private immutable _entryPoint;
 
-    function entryPoint() public view override returns (IEntryPoint) {
+    function entryPoint() public view returns (IEntryPoint) {
         return _entryPoint;
     }
-    
+
     address public immutable walletImplementation;
 
     event WalletDeployed(address wallet, address owner);
 
-    constructor(IEntryPoint _entryPoint) {
-        entryPoint = _entryPoint;
+    constructor(IEntryPoint entryPoint_) {
+        _entryPoint = entryPoint_;
 
-        SmartAccount wallet = new SmartAccount(_entryPoint, address(this));
+        SmartAccount wallet = new SmartAccount(entryPoint_, address(this));
         walletImplementation = address(wallet);
     }
 
-    function getAddress(address owner, uint256 salt) public view returns (address predicted) {
+    function getAddress(
+        address owner,
+        uint256 salt
+    ) public view returns (address predicted) {
         bytes32 bytecodeHash = keccak256(getBytecode(owner));
-        return address(uint160(uint(keccak256(abi.encodePacked(
-            bytes1(0xff),
-            address(this),
-            bytes32(salt),
-            bytecodeHash
-        )))));
+        return
+            address(
+                uint160(
+                    uint(
+                        keccak256(
+                            abi.encodePacked(
+                                bytes1(0xff),
+                                address(this),
+                                bytes32(salt),
+                                bytecodeHash
+                            )
+                        )
+                    )
+                )
+            );
     }
 
-    function createWallet(address owner, uint256 salt) external returns (address wallet) {
+    function createWallet(
+        address owner,
+        uint256 salt
+    ) external returns (address wallet) {
         bytes memory bytecode = getBytecode(owner);
         assembly {
             wallet := create2(0, add(bytecode, 32), mload(bytecode), salt)
@@ -45,9 +59,10 @@ contract SmartAccountFactory {
     }
 
     function getBytecode(address owner) internal view returns (bytes memory) {
-        return abi.encodePacked(
-            type(SmartAccount).creationCode,
-            abi.encode(entryPoint, owner)
-        );
+        return
+            abi.encodePacked(
+                type(SmartAccount).creationCode,
+                abi.encode(_entryPoint, owner)
+            );
     }
 }
