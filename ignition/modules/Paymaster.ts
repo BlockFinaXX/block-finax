@@ -10,10 +10,10 @@ const PaymasterModule = buildModule("PaymasterModule", (m) => {
 
   const gasLimit = m.getParameter("gasLimit", DEFAULT_GAS_LIMIT);
 
-  // 👇 Pass deployer address via deployment params
+  // Pass deployer address via deployment params
   const initialOwner = m.getParameter(
     "initialOwner",
-    "0x1D434f1b7a3F009366621330c9ba61118598b40b"
+    "0xA5819482339B0E914aB12f98265Fdb0E6400bF91"
   );
 
   const paymaster = m.contract("Paymaster", [
