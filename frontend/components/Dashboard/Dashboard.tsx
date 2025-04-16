@@ -4,7 +4,7 @@ import RecentTransactions from "./RecentTransactions";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { Link } from "wouter";
-import { useWeb3 } from "../../hooks/useWeb3";
+// import { useWeb3 } from "../../hooks/useWeb3";
 import {
   Plus,
   Upload,
@@ -13,12 +13,12 @@ import {
   AlertTriangle,
   ArrowRight,
 } from "lucide-react";
-import { useContracts } from "../../hooks/useContracts";
+// `import { useContracts } from "../../hooks/useContracts";`
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import RiskDashboard from "../risk/RiskDashboard";
 
 const ContractStatusOverview = () => {
-  const { contracts, isLoadingContracts } = useContracts();
+  //   const { contracts, isLoadingContracts } = useContracts();
 
   const countByStatus = {
     DRAFT: 0,
@@ -237,8 +237,8 @@ const RiskSummary = () => {
 };
 
 const Dashboard = () => {
-  const { isLoggedIn } = useWeb3();
-  const { contracts } = useContracts();
+  //   const { isLoggedIn } = useWeb3();
+  //   const { contracts } = useContracts();
   const [activeTab, setActiveTab] = useState<string>("overview");
 
   return (
