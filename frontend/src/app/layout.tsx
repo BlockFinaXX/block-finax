@@ -1,10 +1,10 @@
-// app/layout.tsx
 import React from "react";
-import "@/styles/globals.css";
+import "@/globals.css";
+import "@/assets/styles/globals.css";
 
 export const metadata = {
-  title: "ApeChain DApp",
-  description: "Your dashboard on ApeChain",
+  title: "BlockFinax",
+  description: ">Secure Trade Platform",
 };
 
 export default function RootLayout({
