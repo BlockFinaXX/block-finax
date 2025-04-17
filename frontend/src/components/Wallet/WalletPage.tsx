@@ -469,7 +469,7 @@ const TransferDialog = ({
   );
 };
 
-const EnhancedWalletPage = () => {
+const WalletPage = () => {
   const { user, isLoggedIn } = useWeb3();
   const {
     wallets,
@@ -671,4 +671,4 @@ const EnhancedWalletPage = () => {
   );
 };
 
-export default EnhancedWalletPage;
+export default WalletPage;
