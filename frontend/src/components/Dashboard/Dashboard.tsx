@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import DashboardStats from "./DashboardStats";
 import RecentTransactions from "./RecentTransactions";
