@@ -44,7 +44,7 @@ import {
   RiskTrend,
   getRiskLevelColor,
   getRiskCategoryIcon,
-} from "@/types/risk";
+} from "../../types/risk";
 import RiskOverview from "./RiskOverview";
 import RiskInsightsList from "./RiskInsightsList";
 import RiskTrendsChart from "./RiskTrendsChart";

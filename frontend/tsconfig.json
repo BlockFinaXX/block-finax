@@ -18,8 +18,9 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".", // Added to specify root as base URL
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"] // Moved into "compilerOptions"
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

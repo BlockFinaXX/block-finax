@@ -3,6 +3,15 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
+  safelist: [
+    "border-border", // border color
+    "bg-background", // background color
+    "text-foreground", // text color
+    "bg-popover", // popover background
+    "text-popover-foreground", // popover text
+    "bg-card", // card background
+    "text-card-foreground", // card text
+  ],
   theme: {
     extend: {
       borderRadius: {
@@ -62,26 +71,14 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
-
-      borderColor: {
-        border: "hsl(var(--border))",
-      },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
