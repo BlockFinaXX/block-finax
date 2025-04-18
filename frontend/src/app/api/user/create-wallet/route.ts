@@ -21,14 +21,14 @@ export async function POST(req: NextRequest) {
   if (!user)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
 
-  const web3 = new Web3(process.env.RPC_URL!);
+  const web3 = new Web3(process.env.APECHAIN_RPC_URL!);
   const walletFactory = new web3.eth.Contract(
     WalletFactoryABI as any,
-    process.env.FACTORY_ADDRESS!
+    process.env.WALLET_FACTORY_ADDRESS!
   );
 
   const deployer = web3.eth.accounts.privateKeyToAccount(
-    process.env.DEPLOYER_PRIVATE_KEY!
+    process.env.PRIVATE_KEY!
   );
   web3.eth.accounts.wallet.add(deployer);
   web3.eth.defaultAccount = deployer.address;
