@@ -100,7 +100,7 @@
   }
 } */
 
-@layer base {
+/* @layer base {
   * {
     border-color: hsl(var(--border));
   }
@@ -109,4 +109,4 @@
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-}
+} */
