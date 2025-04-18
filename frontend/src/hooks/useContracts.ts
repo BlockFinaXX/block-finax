@@ -5,6 +5,15 @@ import { queryClient } from "@/lib/queryClient";
 import { EscrowContract } from "../types/contract";
 import { useToast } from "@/hooks/use-toast";
 
+const fetchContracts = async () => {
+  const response = await apiRequest("GET", "/api/contracts");
+  return response.json();
+};
+
+const fetchContractById = async (id: number) => {
+  const response = await apiRequest("GET", `/api/contracts/${id}`);
+  return response.json();
+};
 export const useContracts = (contractId?: number) => {
   const { toast } = useToast();
 
@@ -16,6 +25,7 @@ export const useContracts = (contractId?: number) => {
     refetch: refetchContracts,
   } = useQuery({
     queryKey: ["/api/contracts"],
+    queryFn: fetchContracts,
     enabled: !contractId,
   });
 
@@ -27,6 +37,7 @@ export const useContracts = (contractId?: number) => {
     refetch: refetchContract,
   } = useQuery({
     queryKey: ["/api/contracts", contractId],
+    queryFn: () => fetchContractById(contractId!),
     enabled: !!contractId,
   });
 
