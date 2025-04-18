@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import User from "@/models/user";
+import user from "@/app/models/user";
 import { verifyJwt } from "@/utils/jwt";
 import { ethers } from "ethers";
 import WalletFactoryABI from "@/abis/WalletFactory.json";
