@@ -1,9 +1,10 @@
 import React from "react";
-import "@/assets/styles/globals.css";
+import "../assets/styles/globals.css";
+import QueryProvider from "@/providers/query-provider";
 
 export const metadata = {
   title: "BlockFinax",
-  description: ">Secure Trade Platform",
+  description: "Secure Trade Platform",
 };
 
 export default function RootLayout({
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
