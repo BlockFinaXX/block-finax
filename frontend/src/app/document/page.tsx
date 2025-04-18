@@ -1,8 +1,8 @@
-import React from "react";
-import Documents from "@/components/Documents/DocumentsPage";
+// import React from "react";
+// import Documents from "@/components/Documents/DocumentsPage";
 
-const DocumentsPage: React.FC = () => {
-  return <Documents />;
-};
+// const DocumentsPage: React.FC = () => {
+//   return <Documents />;
+// };
 
-export default DocumentsPage;
+// export default DocumentsPage;

@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Menu, Bell, User, LogOut, ChevronDown } from "lucide-react";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { useAppContext } from "@/hooks/useAppContext";

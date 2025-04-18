@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { useToast } from "../hooks/use-toast";
 import { apiRequest } from "../lib/queryClient";

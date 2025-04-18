@@ -1,6 +1,7 @@
 import React from "react";
-import "../assets/styles/globals.css";
+import "./globals.css";
 import QueryProvider from "@/providers/query-provider";
+import Layout from "../components/layout/Layout";
 
 export const metadata = {
   title: "BlockFinax",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <QueryProvider>{children}</QueryProvider>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );
