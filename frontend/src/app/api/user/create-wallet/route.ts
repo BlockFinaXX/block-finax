@@ -4,7 +4,7 @@ import User from "@/models/user";
 import user from "@/app/models/user";
 import { verifyJwt } from "@/utils/jwt";
 import { ethers } from "ethers";
-import WalletFactoryABI from "@/abis/WalletFactory.json";
+import WalletFactoryABI from "../../../../../../contracts/artifacts/contracts/SmartAccountFactory.sol/SmartAccountFactory.json";
 
 export async function POST(req: NextRequest) {
   const token = req.headers.get("authorization")?.split(" ")[1];
